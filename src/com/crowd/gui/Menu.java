@@ -5,27 +5,22 @@
  */
 package com.crowd.gui;
 
+import com.crowd.entities.Utilisateur;
 import com.crowd.midlet.CrowdRiseMidlet;
+import com.crowd.gui.VideoForm;
 import com.sun.lwuit.Button;
-import com.sun.lwuit.Command;
 import com.sun.lwuit.Display;
 import com.sun.lwuit.Form;
 import com.sun.lwuit.Image;
-import com.sun.lwuit.List;
 import com.sun.lwuit.animations.Transition3D;
 import com.sun.lwuit.events.ActionEvent;
 import com.sun.lwuit.events.ActionListener;
-import com.sun.lwuit.events.FocusListener;
-import com.sun.lwuit.layouts.BoxLayout;
-import com.sun.lwuit.layouts.Layout;
+
+
 import java.io.IOException;
-import java.util.Date;
 
 
-import javax.microedition.lcdui.DateField;
-import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.ImageItem;
-import javax.microedition.lcdui.TextField;
+
 
 /**
  *
@@ -43,10 +38,12 @@ public class Menu extends Form implements ActionListener{
    
    
                             Button Probleme =new Button("Nos Probleme");
-                            Button Solutions =new Button("Nos Solutions");
+                            Button Solutions =new Button("Nos Statistiques");
                             Button event =new Button("Nos événement");
                              Button reclamtion =new Button("Faire une reclamtion");
                               Button user =new Button("Profil");
+                                                            Button out =new Button("Se deconnecter");
+
         
         
     public Menu(String title) {
@@ -70,44 +67,133 @@ public class Menu extends Form implements ActionListener{
                             event.setIcon(EImage);
                               Projet.setIcon(PImage);
                            Solutions.setIcon(SImage);
-                                                                Projet.setIcon(PImage);
+                          Projet.setIcon(PImage);
                                                                 
 
                             
                         } catch (IOException ex) {
                             ex.printStackTrace();
-                            System.err.println("zut l'image  !!!!!!!!!!!!!!!");
                         }
                         
                         
-                         
-                           
+                   event.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            
+          
+   
+               Form a =new FormListEvenement("Evenements");
+                
+               a.show();
+                        
+            
+            }
+        });
+                                
+                   reclamtion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            
+   
+               Form a =new FormListReclamation("Reclamtion");
+             
+               a.show();
+               
+
+            
+            
+            }
+        });
+                       
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   Probleme.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            
+   
+               Form a =new FormListProbleme("Problemes");
+                 
+               a.show();
+               
+
+            
+            
+            }
+        }); 
+                   
+                   
+                   
+                   
+                   
+                    out.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            
+   
+               Form a =new ConnexionForm("au revoir");
+                 
+               a.show();
+               
+
+            
+            
+            }
+        });          
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+            Solutions.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            
+               CrowdRiseMidlet.Mclcdui.Displcdui.setCurrent(new Statistique("Statistique"));
+               
+
+            
+            
+            }
+        });        
+               user.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            setTransitionOutAnimator(Transition3D.createCube(180, true));
+  
+                Utilisateur u = ConnexionForm.clientConnecté;
+            
+            Form f = new UserDetailForm("Profil",u);
+            f.show();
+            
+            }
+        });             
                             
 
               Projet.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
 
-   List l =new ListProjet("aaaa");
-   
-               Form a =new Form();
-               
-             a.setTransitionInAnimator(Transition3D.createRotation(250, true));
-            a.addCommandListener(this);
-               a.addComponent(l);
-               a.animate();
-               a.show();
-                        
+   javax.microedition.lcdui.Form f = new VideoForm("Promotion de projet",CrowdRiseMidlet.Mclcdui.Displcdui);
+//               Form a =new FormListProjet("Projets");
+//            
+//               a.show();
+            CrowdRiseMidlet.Mclcdui.Displcdui.setCurrent(f);
 
             }
         });
                             
                             
                             addComponent(Projet);
-                             addComponent(Solutions);
                             addComponent(Probleme);
                             addComponent(event);
                               addComponent(reclamtion);
-                        
+                                                     addComponent(Solutions);
+                                                     addComponent(user);
+                                                     addComponent(out);
+
                         
     }
 
@@ -118,7 +204,6 @@ public class Menu extends Form implements ActionListener{
         
         if (Projet.isSelected()) {
             
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             
         }
 

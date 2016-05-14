@@ -5,6 +5,7 @@
  */
 package com.crowd.midlet;
 
+import com.crowd.gui.ConnexionForm;
 import com.crowd.gui.Menu;
 import com.sun.lwuit.Button;
 import com.sun.lwuit.Display;
@@ -15,6 +16,10 @@ import com.sun.lwuit.layouts.FlowLayout;
 import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
 import java.io.IOException;
+import java.io.InputStream;
+import javax.microedition.media.Manager;
+import javax.microedition.media.MediaException;
+import javax.microedition.media.Player;
 import javax.microedition.midlet.MIDlet;
 
 
@@ -26,26 +31,43 @@ import javax.microedition.midlet.MIDlet;
 public class CrowdRiseMidlet extends MIDlet {
     
     public   Display Disp ;
+    public  javax.microedition.lcdui.Display Displcdui= javax.microedition.lcdui.Display.getDisplay(this);
    public static CrowdRiseMidlet Mc ; 
+   public static CrowdRiseMidlet Mclcdui ; 
     private Resources r;
+              Player p;
+     InputStream is= getClass().getResourceAsStream("/SoundMP3/ShakeYourBootay.wav");
+            
+            
     public void startApp() {
        Mc=this;
+       Mclcdui=this;
         Disp.init(this);
-        
+       
             try {
-            r = Resources.open("/com/crowd/res/bn.res");
-            System.out.println("cbn hmd !!!!!!!!!!!!!!!!!!!!!");
+            r = Resources.open("/com/crowd/res/araga.res");
             UIManager.getInstance().addThemeProps(r.getTheme("Theme 1"));
         } catch (IOException ex) {
             ex.getMessage();
-            System.out.println("zut c pas bon !!!!!!!!!!!!!!!!");
         }
+          try {
+          p=Manager.createPlayer(is, "audio/x-wav");
+      } catch (IOException ex) {
+          ex.printStackTrace();
+      } catch (MediaException ex) {
+          ex.printStackTrace();
+      }
+      try {
+          p.start();
+      } catch (MediaException ex) {
+          ex.printStackTrace();
+      }
         
         
-        
-      
-     Form  a = new Menu("Menu");
-     a.show();
+  
+
+Form f = new ConnexionForm("Bonjour :) ");
+f.show();
          
     }
     

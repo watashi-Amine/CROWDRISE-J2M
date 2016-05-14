@@ -32,14 +32,14 @@ import javax.microedition.lcdui.Ticker;
  *
  * @author araga
  */
-public class InsertProjet  extends Form implements CommandListener,ActionListener,Runnable{
+public class InsertProjet  extends Form implements CommandListener,ActionListener{
     private Ticker tk0;
         private Command Projetcmd = new Command("Ajouter");
     private Command retour = new Command("retour");
 
      private TextArea  TitreTF = new TextArea(" Votre titre", 1, 15, TextArea.ANY);
         private TextArea  ResumerTF = new TextArea(" Description du projet", 5, 15, TextArea.ANY);
-        private TextArea  BudgetTF = new TextArea(" Budget du projet", 1, 15, TextArea.DECIMAL);
+        private TextArea  BudgetTF = new TextArea("0000", 1, 15, TextArea.DECIMAL);
            Label titre =new Label("Titre");
             Label resume =new Label("Resumé");
              Label budget =new Label("budget");
@@ -78,21 +78,6 @@ public class InsertProjet  extends Form implements CommandListener,ActionListene
 
     public void commandAction(Command c, Displayable d) {
 
-//
-//  if (c == retour) {
-//          crowdMidlet.Mc.disp.setCurrent(new ListProjet("Projets", List.IMPLICIT));
-//        }
-//
-// if (c == Projetcmd) {
-//            if ( TitreTF.getString()!=null ||ResumerTF.getString()!=null  ||BudgetTF.getString()!=null ) {
-//             InsertProjet();
-//            System.out.println("fin");
-////        }
-//            else{
-//         
-//                 Alert nn = new Alert("ko", "Les champs sont vides", null, AlertType.WARNING);
-//                        Disp.setCurrent(nn);
-//        }
  }
 
 
@@ -113,24 +98,7 @@ public class InsertProjet  extends Form implements CommandListener,ActionListene
     public void actionPerformed(ActionEvent evt) {
  Command back = evt.getCommand();
   if (back.equals(Projetcmd)) {
-        Thread t = new Thread(this);
-            t.start();
-      System.out.println("fin");
-        }
- if (back.equals(retour)) {
-        this.setTransitionOutAnimator(Transition3D.createCube(750, true));
-            Form m = new Menu("Menu");
-           m.show();
-        }
-
-
-
-    }
-
-    public void run() {
-
-
-
+       
 
 String t0 = TitreTF.getText();
 String t1 = ResumerTF.getText();
@@ -163,17 +131,38 @@ String n = "";
  
  
  
- String added = Recuperate.GetTextServer("http://localhost/crowdRiseMobile/insert.php"+ "?NOM_PROJET=" + b + "&RESUME=" + n + "&BUDJET=" + t2+ "&imageFile=" + t3);
+ String added = Recuperate.GetTextServer("http://localhost/crowdRiseMobile/Projets/insert.php"+ "?NOM_PROJET=" + b + "&RESUME=" + n + "&BUDJET=" + t2+ "&imageFile=" + t3);
          
-                  if (added.equals("added")) {
-            System.out.println("Added Panier");
+                  if (added.equals("successfully added")) {
+                      Dialog validDialog = new Dialog("Alert");
+        validDialog.setScrollable(false);
+        validDialog.setIsScrollVisible(false);
+        validDialog.setTimeout(100); // set timeout milliseconds
+        TextArea textArea = new TextArea("Ajout avec succes"); //pass the alert text here
+        textArea.setFocusable(false);
+        textArea.setIsScrollVisible(false);
+        validDialog.addComponent(textArea);
+        validDialog.show(0, 100, 10, 10, true);
+            System.out.println("Added Projet");
         } else {
-            System.out.println("Panier Existe");
+            System.out.println("Projets Existe");
         }
                 
                 
-                
-            }
+            
+      System.out.println("fin");
+        }
+ if (back.equals(retour)) {
+        this.setTransitionOutAnimator(Transition3D.createCube(750, true));
+            Form m = new Menu("Menu");
+           m.show();
+        }
+
+
+
+    }
+
+
 
 
 

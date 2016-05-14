@@ -34,10 +34,9 @@ import org.xml.sax.SAXException;
 
 
 
-public class ListProjet extends List implements CommandListener, Runnable,ActionListener,SelectionListener,ListCellRenderer {
+public class ListProjet extends List implements CommandListener,ActionListener,SelectionListener,ListCellRenderer {
     Command cmdinsert = new Command("Ajouter");
 
-    Command cmdRefresh = new Command("refresh");
     Projet[] projet;
     StringBuffer sb;
     categorieProjet[] cat;
@@ -56,32 +55,28 @@ public class ListProjet extends List implements CommandListener, Runnable,Action
 
   
         int   index = getSelectedIndex();
-        System.out.println("AAAAAAAAAAAA"+getSelectedIndex());
         Form a =new ProjetDetailForm("Detaille",projet[index]);
         a.show();
 
                    }
                });
              
-                 addItem(cmdRefresh)  ; 
            
                  
                  
                  
-         String a="Nom Projet";
-        addItem(a);
+      
                
         setCommandList(true);
         
           ProjetHandler projetHandler = new ProjetHandler();
-    String    url1 = "http://localhost/crowdRiseMobile/select.php" ;
+    String    url1 = "http://localhost/crowdRiseMobile/Projets/select.php" ;
         try {
           
               SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
        
              HttpConnection hc = (HttpConnection) Connector.open(url1);
            
-            System.out.println("ici ici ici ici ici ici");
             
             DataInputStream dis = new DataInputStream(hc.openDataInputStream());
                                 
@@ -108,45 +103,11 @@ public class ListProjet extends List implements CommandListener, Runnable,Action
 
    
 
-    public void run() {
- 
-         ProjetHandler projetHandler = new ProjetHandler();
-    String    url1 = "http://localhost/crowdRiseMobile/select.php" ;
-        try {
-          
-              SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-       
-             HttpConnection hc = (HttpConnection) Connector.open(url1);
-           
-            System.out.println("ici ici ici ici ici ici");
-            
-            DataInputStream dis = new DataInputStream(hc.openDataInputStream());
-                                
-            parser.parse(dis, projetHandler);
-            
-            projet = projetHandler.getProjet();
-
-            
-            
-            
-            
-            
-            if (projet.length > 0) {
-                for (int i = 0; i < projet.length; i++) {
-                    addItem(projet[i].getNOM_PROJET());
-                }
-            }
-        } catch (ParserConfigurationException ex) {
-        } catch (SAXException ex) {
-        } catch (IOException ex) {
-        }    }
-
     public void commandAction(javax.microedition.lcdui.Command c, Displayable d) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAA");
     
     }
 

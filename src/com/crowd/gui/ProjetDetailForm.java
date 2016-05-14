@@ -37,15 +37,22 @@ public class ProjetDetailForm extends Form implements CommandListener ,ActionLis
 
     Command cmdBack = new Command("Retour");
      Command cmdadd = new Command("Ajouter");
+          Command cmdcomment = new Command("lists des commentaires");
+                                              Command ajouter = new Command("Commenter");
+
+
     Display Disp;
         //image
      ImageItem imgt = new ImageItem("img item", null, ImageItem.LAYOUT_CENTER, "don't do that");
     Image img;
     
- 
+ Projet prj ;
 
     public ProjetDetailForm(String title, Projet p) {
                 super(title);
+                
+                prj=p;
+                
           this.Disp = CrowdRiseMidlet.Mc.Disp;
            String    url1 = "http://localhost/1/uploadsProjets/" ;
           
@@ -77,7 +84,9 @@ public class ProjetDetailForm extends Form implements CommandListener ,ActionLis
         addComponent(st0);
 
         addComponent(st1);
-       Button bb = new Button("", mg);
+       com.sun.lwuit.Image thumb = mg.scaledSmallerRatio(250,250);
+              Button bb = new Button("", thumb);
+
         addComponent(bb);
         addComponent(st2);
         addComponent(st3);
@@ -86,7 +95,8 @@ public class ProjetDetailForm extends Form implements CommandListener ,ActionLis
         addCommand(cmdBack);
          addCommand(cmdadd);
          
-         
+                  addCommand(cmdcomment);
+
          
    this.addCommandListener(this);
         
@@ -127,7 +137,17 @@ public class ProjetDetailForm extends Form implements CommandListener ,ActionLis
             Form m = new InsertProjet("Ajouter Projet");
            m.show();
         }
-        
+           if (back.equals(cmdcomment)) {
+           
+               Form a =new FormListComent("Commentaires",prj);
+
+               a.show();
+        }
+           if (back.equals(ajouter)) {
+               
+               Form f = new InsertComment("Comment",prj);
+            
+        }
         
     }
     
