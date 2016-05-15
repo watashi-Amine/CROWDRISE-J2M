@@ -129,7 +129,7 @@ addComponent(st8);
             if (back.equals(cmdpos)) {
             this.setTransitionOutAnimator(Transition3D.createCube(750, true));
                 MIDlet      k=CrowdRiseMidlet.Mc;
-                                Displayable      d = null ;
+                  Displayable     d =CrowdRiseMidlet.Mc.dispable          ;
 
           CrowdRiseMidlet.Mc.Displcdui.setCurrent(new GoogleMap(k, d,event));
         }

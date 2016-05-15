@@ -39,6 +39,7 @@ public class InsertComment  extends Form implements CommandListener,ActionListen
     
         private Command Commentcmd = new Command("Ajouter");
     private Command retourcmd = new Command("retour");
+    private Command Menucmd = new Command("retour");
 
      private TextArea  CommentTF = new TextArea(" Votre Commentaire", 1, 15, TextArea.ANY);
 
@@ -124,7 +125,7 @@ String b = "";
             
             
             
-         String url = "http://localhost/crowdRiseMobile/Comment/insert.php?thread_id=aa&body=" + b + "&author_id=3" + "&idProjet=" + prj.getID_PROJET();
+         String url = "http://localhost/crowdRiseMobile/Comment/insert.php?thread_id=aa&body=" + b + "&author_id="+ConnexionForm.clientConnecté.getId_membre() + "&idProjet=" + prj.getID_PROJET();
       System.out.println(url);
 
  
@@ -152,7 +153,11 @@ String b = "";
            m.show();
         }      
             
-            
+         if (back.equals(Menucmd)) {
+        this.setTransitionOutAnimator(Transition3D.createCube(750, true));
+            Form m = new Menu("Menu");
+           m.show();
+        }    
             
             
             

@@ -38,6 +38,7 @@ import org.xml.sax.SAXException;
 public class FormListReclamation extends Form implements CommandListener,ActionListener,SelectionListener {
     Command cmdinsert = new Command("Ajouter");
     Command cmdretour = new Command("retour");
+    Command cmdmail = new Command("Envoyer un mail");
  List l =new List();
     Reclamation[] reclam;
     
@@ -86,6 +87,9 @@ public class FormListReclamation extends Form implements CommandListener,ActionL
         }   
         
         addCommand(cmdinsert);
+                addCommand(cmdmail);
+                addCommand(cmdretour);
+
         addComponent(l);
         l.addSelectionListener(this);
         addCommandListener(this);
@@ -113,7 +117,12 @@ public class FormListReclamation extends Form implements CommandListener,ActionL
            m.show();
         }
         
-    
+        if (back.equals(cmdmail)) {
+            this.setTransitionOutAnimator(Transition3D.createCube(750, true));
+            
+            Form m = new FormMail("mail");
+           m.show();
+        }
     }
 
     public void selectionChanged(int oldSelected, int newSelected) {

@@ -24,6 +24,7 @@ import com.sun.lwuit.events.ActionListener;
 import com.sun.lwuit.layouts.BoxLayout;
 
 import java.io.DataInputStream;
+import java.util.Random;
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 
@@ -60,13 +61,22 @@ public Command Oublcmd =new Command("Mot de passe oublier");
 
     public ConnexionForm(String title) {
                 super(title);
+               
+              
+                outBTN.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+
+        CrowdRiseMidlet.Mc.notifyDestroyed();
+
+                    }
+                });
                 
                 
               logBTN.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             
                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
-    try {
+
                     
                     
                   String   t0 = loginTF.getText();
@@ -102,7 +112,7 @@ public Command Oublcmd =new Command("Mot de passe oublier");
                     
                     
                     
-                    
+                        try {
                     
                     
                     
@@ -241,7 +251,13 @@ public Command Oublcmd =new Command("Mot de passe oublier");
        
              
         }
-        
+           if (back.equals(Oublcmd)) {
+          
+Form f = new MdpForm(" Sms ");
+f.show();
+       
+             
+        }
     }
     
     

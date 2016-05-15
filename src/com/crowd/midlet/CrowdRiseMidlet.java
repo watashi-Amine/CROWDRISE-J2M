@@ -17,6 +17,7 @@ import com.sun.lwuit.plaf.UIManager;
 import com.sun.lwuit.util.Resources;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.microedition.lcdui.Displayable;
 import javax.microedition.media.Manager;
 import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
@@ -34,6 +35,7 @@ public class CrowdRiseMidlet extends MIDlet {
     public  javax.microedition.lcdui.Display Displcdui= javax.microedition.lcdui.Display.getDisplay(this);
    public static CrowdRiseMidlet Mc ; 
    public static CrowdRiseMidlet Mclcdui ; 
+   public  Displayable dispable ;
     private Resources r;
               Player p;
      InputStream is= getClass().getResourceAsStream("/SoundMP3/ShakeYourBootay.wav");
@@ -43,7 +45,7 @@ public class CrowdRiseMidlet extends MIDlet {
        Mc=this;
        Mclcdui=this;
         Disp.init(this);
-       
+      
             try {
             r = Resources.open("/com/crowd/res/araga.res");
             UIManager.getInstance().addThemeProps(r.getTheme("Theme 1"));

@@ -38,6 +38,8 @@ import org.xml.sax.helpers.DefaultHandler;
 public class FormListSolution extends Form implements CommandListener,ActionListener,SelectionListener {
     Command cmdinsert = new Command("Ajouter");
     Command cmdretour = new Command("retour");
+        Command cmdmenu = new Command("Menu");
+
         List l =new List();
 
     Solution[] solus;
@@ -110,7 +112,13 @@ public class FormListSolution extends Form implements CommandListener,ActionList
             Form m = new ProblemeDetailForm("Commentaires",prb);
            m.show();
         }
-        
+        if (back.equals(cmdmenu)) {
+            this.setTransitionOutAnimator(Transition3D.createCube(750, true));
+            
+            Form m = new Menu("Menu");
+           m.show();
+        }
+          
     
     }
 
